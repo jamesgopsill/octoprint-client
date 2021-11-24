@@ -1,0 +1,12 @@
+{
+	"extends": "@tsconfig/node16/tsconfig.json",
+	"compilerOptions": {
+		"outDir": "dist",
+		"rootDir": "src",
+		"declaration": true,
+		"esModuleInterop": true,
+		"strict": true,
+		"incremental": true
+	},
+	"include": ["src/"]
+}

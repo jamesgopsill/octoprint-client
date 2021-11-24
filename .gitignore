@@ -1,0 +1,7 @@
+dist/
+node_modules/
+
+tests/test.config.ts
+*.tsbuildinfo
+
+.DS_Store

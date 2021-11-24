@@ -1,0 +1,48 @@
+{
+  "name": "ocotprint-client",
+  "version": "0.1.0",
+  "description": "Client for interacting with the OctoPrint API",
+  "keywords": [
+    "octoprint",
+    "3d printing",
+    "additive manufacturing"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "James Gopsill",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JamesGopsill/octoprint-client"
+  },
+  "bugs": {
+    "url": "https://github.com/JamesGopsill/octoprint-client/issues"
+  },
+  "homepage": "https://jamesgopsill.github.io/octoprint-client/",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "test:general": "jest --runInBand tests/general.test.ts",
+    "test": "jest --runInBand",
+    "build": "tsc",
+    "docs": "typedoc",
+    "format": "prettier --write src/**/* && prettier --write tests/**/*",
+    "pre-add": "yarn format && yarn docs && yarn tsc"
+  },
+  "dependencies": {
+    "cross-fetch": "^3.1.4",
+    "is-ip": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "jest": "^27.3.1",
+    "prettier": "^2.4.1",
+    "prettier-plugin-organize-imports": "^2.3.4",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0",
+    "typedoc": "^0.22.9",
+    "typescript": "^4.4.4"
+  }
+}

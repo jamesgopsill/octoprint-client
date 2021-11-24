@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+  octoprint:
+    image: octoprint/octoprint
+    ports:
+      - 80:80

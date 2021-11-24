@@ -1,0 +1,3 @@
+docs/** linguist-documentation
+dist/** linguist-generated
+*.gcode linguist-vendored
