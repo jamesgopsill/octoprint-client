@@ -14,3 +14,9 @@ test("GET system information", async () => {
 	console.log(v)
 	expect(typeof v).toBe("object")
 })
+
+test("GET connection settings", async () => {
+	const v = await client.getConnectionSettings()
+	console.log(v)
+	expect(typeof v).toBe("object")
+})

@@ -19,18 +19,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OctoPrintClient = void 0;
+exports.OctoPrintClient = exports.OctoPrintGeneralEndpoints = void 0;
 const general = __importStar(require("./general"));
+exports.OctoPrintGeneralEndpoints = __importStar(require("./general"));
 /**
- * OctoPrint Client Class
+ * OctoPrint client class
  *
  * ```typescript
  * import { OctoPrintClient } from "octoprint-client"
  *
- * const client = OctoprintClient("localhost", "abcdefg-...")
+ * const client = OctoPrintClient("URL", "APIKEY")
  * ```
  *
- * @param ip The IP address for the printer on the network.
+ * @param url The url of the OctoPrint server.
  * @param apiKey Your unique key to authorise access to the OctoPrint API.
  */
 class OctoPrintClient {
@@ -43,6 +44,9 @@ class OctoPrintClient {
     }
     getSystemInformation() {
         return general.getSystemInformation(this.baseURL, this.apiKey);
+    }
+    getConnectionSettings() {
+        return general.getConnectionSettings(this.baseURL, this.apiKey);
     }
 }
 exports.OctoPrintClient = OctoPrintClient;

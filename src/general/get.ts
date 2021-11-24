@@ -1,18 +1,21 @@
 import { get } from "../helpers"
+import {
+	ConnectionSettings,
+	ServerInformation,
+	VersionInformation,
+} from "./interfaces"
 
 export const getVersionInformation = (baseURL: string, apiKey: string) => {
 	const url = `${baseURL}/api/version`
-	return get<{
-		api: string
-		server: string
-		text: string
-	}>(url, apiKey)
+	return get<VersionInformation>(url, apiKey)
 }
 
 export const getSystemInformation = (baseURL: string, apiKey: string) => {
 	const url = `${baseURL}/api/version`
-	return get<{
-		server: string
-		safemode: string
-	}>(url, apiKey)
+	return get<ServerInformation>(url, apiKey)
+}
+
+export const getConnectionSettings = (baseURL: string, apiKey: string) => {
+	const url = `${baseURL}/api/connection`
+	return get<ConnectionSettings>(url, apiKey)
 }

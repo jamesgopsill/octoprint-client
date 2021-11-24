@@ -1,18 +1,18 @@
 import isIp from "is-ip"
-
 import * as general from "./general"
 
+export * as OctoPrintGeneralEndpoints from "./general"
 
 /**
- * OctoPrint Client Class
+ * OctoPrint client class
  * 
  * ```typescript
  * import { OctoPrintClient } from "octoprint-client"
  * 
- * const client = OctoprintClient("localhost", "abcdefg-...")
+ * const client = OctoPrintClient("URL", "APIKEY")
  * ```
  * 
- * @param ip The IP address for the printer on the network.
+ * @param url The url of the OctoPrint server.
  * @param apiKey Your unique key to authorise access to the OctoPrint API.
  */
 export class OctoPrintClient {
@@ -20,12 +20,9 @@ export class OctoPrintClient {
 	public readonly baseURL: string
 	public readonly apiKey: string
 
-
 	constructor(baseURL: string, apiKey: string) {
-
 		this.baseURL = baseURL
 		this.apiKey = apiKey
-
 	}
 
 	public getVersionInformation() {
@@ -34,5 +31,9 @@ export class OctoPrintClient {
 
 	public getSystemInformation() {
 		return general.getSystemInformation(this.baseURL, this.apiKey)
+	}
+
+	public getConnectionSettings() {
+		return general.getConnectionSettings(this.baseURL, this.apiKey)
 	}
 }
