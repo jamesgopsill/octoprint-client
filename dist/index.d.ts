@@ -1,5 +1,7 @@
 import * as general from "./general";
+import * as files from "./files";
 export * as OctoPrintGeneralEndpoints from "./general";
+export * as OctoPrintFilesEndpoints from "./files";
 /**
  * OctoPrint client class
  *
@@ -19,4 +21,7 @@ export declare class OctoPrintClient {
     getVersionInformation(): Promise<general.VersionInformation>;
     getSystemInformation(): Promise<general.ServerInformation>;
     getConnectionSettings(): Promise<general.ConnectionSettings>;
+    getFiles(): Promise<unknown>;
+    getFilesRecursive(): Promise<unknown>;
+    postFileLocal(filename: string, gcode: string): Promise<files.PostLocalFileResponse>;
 }

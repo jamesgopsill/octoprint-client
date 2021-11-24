@@ -1,7 +1,8 @@
-import isIp from "is-ip"
 import * as general from "./general"
+import * as files from "./files"
 
 export * as OctoPrintGeneralEndpoints from "./general"
+export * as OctoPrintFilesEndpoints from "./files"
 
 /**
  * OctoPrint client class
@@ -35,5 +36,17 @@ export class OctoPrintClient {
 
 	public getConnectionSettings() {
 		return general.getConnectionSettings(this.baseURL, this.apiKey)
+	}
+
+	public getFiles() {
+		return files.getFiles(this.baseURL, this.apiKey)
+	}
+
+	public getFilesRecursive() {
+		return files.getFilesRecursive(this.baseURL, this.apiKey)
+	}
+
+	public postFileLocal(filename: string, gcode: string) {
+		return files.postFileLocal(this.baseURL, this.apiKey, filename, gcode)
 	}
 }

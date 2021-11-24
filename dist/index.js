@@ -19,9 +19,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OctoPrintClient = exports.OctoPrintGeneralEndpoints = void 0;
+exports.OctoPrintClient = exports.OctoPrintFilesEndpoints = exports.OctoPrintGeneralEndpoints = void 0;
 const general = __importStar(require("./general"));
+const files = __importStar(require("./files"));
 exports.OctoPrintGeneralEndpoints = __importStar(require("./general"));
+exports.OctoPrintFilesEndpoints = __importStar(require("./files"));
 /**
  * OctoPrint client class
  *
@@ -47,6 +49,15 @@ class OctoPrintClient {
     }
     getConnectionSettings() {
         return general.getConnectionSettings(this.baseURL, this.apiKey);
+    }
+    getFiles() {
+        return files.getFiles(this.baseURL, this.apiKey);
+    }
+    getFilesRecursive() {
+        return files.getFilesRecursive(this.baseURL, this.apiKey);
+    }
+    postFileLocal(filename, gcode) {
+        return files.postFileLocal(this.baseURL, this.apiKey, filename, gcode);
     }
 }
 exports.OctoPrintClient = OctoPrintClient;
