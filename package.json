@@ -1,5 +1,5 @@
 {
-  "name": "ocotprint-client",
+  "name": "octoprint-client",
   "version": "0.1.0",
   "description": "Client for interacting with the OctoPrint API",
   "keywords": [
