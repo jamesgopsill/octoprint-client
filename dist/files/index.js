@@ -1,15 +1,98 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./get"), exports);
-__exportStar(require("./interfaces"), exports);
-__exportStar(require("./post"), exports);
+exports.Files = void 0;
+const base_1 = require("../base");
+const cross_fetch_1 = require("cross-fetch");
+class Files extends base_1.Base {
+    getFiles() {
+        const url = `${this.baseURL}/api/files`;
+        return this.get(url);
+    }
+    async selectFileAndPrint(file) {
+        const url = `${this.baseURL}/api/files/local/${file}`;
+        const config = {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "X-Api-Key": this.apiKey,
+            },
+            body: JSON.stringify({
+                command: "select",
+                print: true,
+            }),
+        };
+        return (0, cross_fetch_1.fetch)(url, config).then((r) => {
+            if (r.ok) {
+                return true;
+            }
+            throw new base_1.ResponseError(r);
+        });
+    }
+    async uploadFileToLocal(gcode) {
+        const url = `${this.baseURL}/api/files/local`;
+        // Create the file upload from the string
+        let formData;
+        if (typeof window === "undefined") {
+            // Node.js
+            const FormData = require("form-data");
+            formData = new FormData();
+            formData.append("file", gcode, "octoprint-client.gcode");
+        }
+        else {
+            // Browser
+            const blob = new Blob([gcode], { type: "text/plain" });
+            formData = new FormData();
+            formData.append("file", blob, "octoprint-client.gcode");
+        }
+        const config = {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "X-Api-Key": this.apiKey,
+            },
+            body: formData,
+        };
+        return (0, cross_fetch_1.fetch)(url, config).then((r) => {
+            if (r.ok) {
+                return r.json();
+            }
+            throw new base_1.ResponseError(r);
+        });
+    }
+    async uploadFileToSDCard(gcode) {
+        const url = `${this.baseURL}/api/files/sdcard`;
+        // Create the file upload from the string
+        let formData;
+        if (typeof window === "undefined") {
+            // Node.js
+            const FormData = require("form-data");
+            formData = new FormData();
+            formData.append("file", gcode, "octoprint-client.gcode");
+        }
+        else {
+            // Browser
+            const blob = new Blob([gcode], { type: "text/plain" });
+            formData = new FormData();
+            formData.append("file", blob, "octoprint-client.gcode");
+        }
+        const config = {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                Accept: "application/json",
+                "X-Api-Key": this.apiKey,
+            },
+            body: formData,
+        };
+        return (0, cross_fetch_1.fetch)(url, config).then((r) => {
+            if (r.ok) {
+                return r.json();
+            }
+            throw new base_1.ResponseError(r);
+        });
+    }
+}
+exports.Files = Files;

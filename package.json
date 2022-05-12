@@ -29,14 +29,17 @@
     "build": "tsc",
     "docs": "typedoc",
     "format": "prettier --write src/**/* && prettier --write tests/**/*",
-    "pre-add": "yarn format && yarn docs && yarn tsc"
+    "pre-add": "pnpm format && pnpm docs && node utils/clean-dist.mjs && pnpm tsc && node utils/clean-crlf.mjs"
   },
   "dependencies": {
     "cross-fetch": "^3.1.4",
     "form-data": "^4.0.0"
   },
   "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
     "@types/jest": "^27.0.2",
+    "@types/node": "^17.0.32",
+    "glob": "^8.0.1",
     "jest": "^27.3.1",
     "prettier": "^2.4.1",
     "prettier-plugin-organize-imports": "^2.3.4",

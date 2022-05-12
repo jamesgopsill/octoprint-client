@@ -34,7 +34,7 @@ export interface GetFilesResponse {
 	total: number
 }
 
-export interface PostLocalFileResponse {
+export interface UploadFileToLocalResponse {
 	files: {
 		local: {
 			name: string
@@ -42,6 +42,28 @@ export interface PostLocalFileResponse {
 			refs: {
 				resource: string
 				download: string
+			}
+		}
+	}
+	done: boolean
+}
+
+export interface UploadFileToSDCardResponse {
+	files: {
+		local: {
+			name: string
+			origin: string
+			refs: {
+				resource: string
+				download: string
+			}
+		}
+		sdcard: {
+			name: string
+			path: string
+			origin: string
+			refs: {
+				resource: string
 			}
 		}
 	}

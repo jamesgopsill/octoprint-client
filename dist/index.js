@@ -1,63 +1,38 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
 }));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OctoPrintClient = exports.OctoPrintFilesEndpoints = exports.OctoPrintGeneralEndpoints = void 0;
-const general = __importStar(require("./general"));
-const files = __importStar(require("./files"));
-exports.OctoPrintGeneralEndpoints = __importStar(require("./general"));
-exports.OctoPrintFilesEndpoints = __importStar(require("./files"));
+exports.ResponseError = exports.OctoPrintClient = void 0;
+const base_1 = require("./base");
+const apply_mixins_1 = require("./apply-mixins");
+const general_1 = require("./general");
+const files_1 = require("./files");
+const job_1 = require("./job");
+const printer_1 = require("./printer");
 /**
- * OctoPrint client class
+ * Inherits from all the other classes featuring the API calls to OctoPrint.
  *
- * ```typescript
- * import { OctoPrintClient } from "octoprint-client"
  *
- * const client = OctoPrintClient("URL", "APIKEY")
- * ```
- *
- * @param url The url of the OctoPrint server.
- * @param apiKey Your unique key to authorise access to the OctoPrint API.
  */
-class OctoPrintClient {
-    constructor(baseURL, apiKey) {
-        this.baseURL = baseURL;
-        this.apiKey = apiKey;
-    }
-    getVersionInformation() {
-        return general.getVersionInformation(this.baseURL, this.apiKey);
-    }
-    getSystemInformation() {
-        return general.getSystemInformation(this.baseURL, this.apiKey);
-    }
-    getConnectionSettings() {
-        return general.getConnectionSettings(this.baseURL, this.apiKey);
-    }
-    getFiles() {
-        return files.getFiles(this.baseURL, this.apiKey);
-    }
-    getFilesRecursive() {
-        return files.getFilesRecursive(this.baseURL, this.apiKey);
-    }
-    postFileLocal(filename, gcode) {
-        return files.postFileLocal(this.baseURL, this.apiKey, filename, gcode);
-    }
+class OctoPrintClient extends base_1.Base {
 }
 exports.OctoPrintClient = OctoPrintClient;
+(0, apply_mixins_1.applyMixins)(OctoPrintClient, [general_1.General, files_1.Files, job_1.Job, printer_1.Printer]);
+// Interfaces
+var base_2 = require("./base");
+Object.defineProperty(exports, "ResponseError", { enumerable: true, get: function () { return base_2.ResponseError; } });
+__exportStar(require("./general/interfaces"), exports);
+__exportStar(require("./files/interfaces"), exports);
+__exportStar(require("./job/enums"), exports);

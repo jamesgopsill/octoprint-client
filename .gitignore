@@ -1,4 +1,5 @@
 node_modules/
+scratch/
 
 tests/test.config.ts
 *.tsbuildinfo

@@ -1,27 +1,19 @@
-import * as general from "./general";
-import * as files from "./files";
-export * as OctoPrintGeneralEndpoints from "./general";
-export * as OctoPrintFilesEndpoints from "./files";
+import { Base } from "./base";
+import { General } from "./general";
+import { Files } from "./files";
+import { Job } from "./job";
+import { Printer } from "./printer";
 /**
- * OctoPrint client class
+ * Inherits from all the other classes featuring the API calls to OctoPrint.
  *
- * ```typescript
- * import { OctoPrintClient } from "octoprint-client"
  *
- * const client = OctoPrintClient("URL", "APIKEY")
- * ```
- *
- * @param url The url of the OctoPrint server.
- * @param apiKey Your unique key to authorise access to the OctoPrint API.
  */
-export declare class OctoPrintClient {
-    readonly baseURL: string;
-    readonly apiKey: string;
-    constructor(baseURL: string, apiKey: string);
-    getVersionInformation(): Promise<general.VersionInformation>;
-    getSystemInformation(): Promise<general.ServerInformation>;
-    getConnectionSettings(): Promise<general.ConnectionSettings>;
-    getFiles(): Promise<unknown>;
-    getFilesRecursive(): Promise<unknown>;
-    postFileLocal(filename: string, gcode: string): Promise<files.PostLocalFileResponse>;
+declare class OctoPrintClient extends Base {
 }
+interface OctoPrintClient extends General, Files, Job, Printer {
+}
+export { OctoPrintClient as OctoPrintClient };
+export { ResponseError } from "./base";
+export * from "./general/interfaces";
+export * from "./files/interfaces";
+export * from "./job/enums";
