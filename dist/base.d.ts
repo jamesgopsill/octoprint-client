@@ -1,10 +1,4 @@
-/**
- * ResponseError to retun any response errors to the user.
- */
-export declare class ResponseError extends Error {
-    response: Response;
-    constructor(response: Response);
-}
+import { HttpResponse } from "./interfaces";
 /**
  * The base class to build the API client from
  */
@@ -16,5 +10,6 @@ export declare abstract class Base {
     /**
      * An internal get request function
      */
-    protected get(url: string, bodyArgs?: {}): Promise<any>;
+    protected get<T>(url: string, bodyArgs?: {}): Promise<HttpResponse<T>>;
+    protected post<T>(url: string, bodyArgs?: {}): Promise<HttpResponse<T>>;
 }

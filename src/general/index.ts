@@ -6,20 +6,18 @@ import type {
 } from "./interfaces"
 
 export class General extends Base {
-	public getVersionInformation(): Promise<VersionInformation> {
+	public version() {
 		const url = `${this.baseURL}/api/version`
-		return this.get(url)
+		return this.get<VersionInformation>(url)
 	}
 
-	/*
-	public getSystemInformation() {
+	public system() {
 		const url = `${this.baseURL}/api/version`
 		return this.get<ServerInformation>(url)
 	}
 
-	public getConnectionSettings() {
+	public connection() {
 		const url = `${this.baseURL}/api/connection`
 		return this.get<ConnectionSettings>(url)
 	}
-	*/
 }

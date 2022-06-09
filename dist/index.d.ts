@@ -13,7 +13,7 @@ declare class OctoPrintClient extends Base {
 interface OctoPrintClient extends General, Files, Job, Printer {
 }
 export { OctoPrintClient as OctoPrintClient };
-export { ResponseError } from "./base";
+export * from "./interfaces";
 export * from "./general/interfaces";
 export * from "./files/interfaces";
 export * from "./job/enums";

@@ -1,4 +1,4 @@
-export interface PrinterStatusResponse {
+export interface PrinterStatus {
 	sd: {
 		ready: boolean
 	}

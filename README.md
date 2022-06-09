@@ -64,3 +64,4 @@ To donate and provide continued support, please go to **[TODO]**.
 - [OctoPrint on Docker Hub](https://hub.docker.com/r/octoprint/octoprint)
 - [Git autocrlf](https://tanutaran.medium.com/solving-git-lf-will-be-replaced-by-crlf-7ca84eb0aad4)
 
+- [Typed Responses](https://www.carlrippon.com/fetch-with-async-await-and-typescript/)

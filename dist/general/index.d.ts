@@ -1,5 +1,7 @@
 import { Base } from "../base";
-import type { VersionInformation } from "./interfaces";
+import type { ConnectionSettings, ServerInformation, VersionInformation } from "./interfaces";
 export declare class General extends Base {
-    getVersionInformation(): Promise<VersionInformation>;
+    version(): Promise<import("..").HttpResponse<VersionInformation>>;
+    system(): Promise<import("..").HttpResponse<ServerInformation>>;
+    connection(): Promise<import("..").HttpResponse<ConnectionSettings>>;
 }

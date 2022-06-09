@@ -1,18 +1,5 @@
 import { fetch } from "cross-fetch"
-
-/**
- * ResponseError to retun any response errors to the user.
- */
-export class ResponseError extends Error {
-	public response: Response
-
-	constructor(response: Response) {
-		super("Check error.response for the response from the server.")
-		this.name = "ResponseError"
-		this.message = "Check error.response for the response from the server."
-		this.response = response
-	}
-}
+import { HttpResponse } from "./interfaces"
 
 /**
  * The base class to build the API client from
@@ -30,7 +17,7 @@ export abstract class Base {
 	/**
 	 * An internal get request function
 	 */
-	protected async get(url: string, bodyArgs?: {}): Promise<any> {
+	protected async get<T>(url: string, bodyArgs?: {}) {
 		if (typeof bodyArgs != "undefined") {
 			bodyArgs = {}
 		}
@@ -44,12 +31,35 @@ export abstract class Base {
 				"X-Api-Key": this.apiKey
 			},
 			body: JSON.stringify(bodyArgs),
-		}).then((r) => {
+		}).then(async (r: HttpResponse<T>) => {
 			if (r.ok) {
-				return r.json()
+				r.data = await r.json()
 			}
-			throw new ResponseError(r)
+			return r
+		})
+	}
+
+	protected async post<T>(url: string, bodyArgs?: {}) {
+		if (typeof bodyArgs == "undefined") {
+			bodyArgs = {}
+		}
+
+		return fetch(url, {
+			method: "POST",
+			mode: "cors",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+				"X-Api-Key": this.apiKey
+			},
+			body: JSON.stringify(bodyArgs),
+		}).then(async (r: HttpResponse<T>) => {
+			if (r.ok && r.status != 204) {
+				r.data = await r.json()
+			}
+			return r
 		})
 	}
 
 }
+

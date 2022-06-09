@@ -14,7 +14,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ResponseError = exports.OctoPrintClient = void 0;
+exports.OctoPrintClient = void 0;
 const base_1 = require("./base");
 const apply_mixins_1 = require("./apply-mixins");
 const general_1 = require("./general");
@@ -31,8 +31,7 @@ class OctoPrintClient extends base_1.Base {
 exports.OctoPrintClient = OctoPrintClient;
 (0, apply_mixins_1.applyMixins)(OctoPrintClient, [general_1.General, files_1.Files, job_1.Job, printer_1.Printer]);
 // Interfaces
-var base_2 = require("./base");
-Object.defineProperty(exports, "ResponseError", { enumerable: true, get: function () { return base_2.ResponseError; } });
+__exportStar(require("./interfaces"), exports);
 __exportStar(require("./general/interfaces"), exports);
 __exportStar(require("./files/interfaces"), exports);
 __exportStar(require("./job/enums"), exports);

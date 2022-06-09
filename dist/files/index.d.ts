@@ -1,8 +1,9 @@
 import { Base } from "../base";
 import type { GetFilesResponse, UploadFileToLocalResponse, UploadFileToSDCardResponse } from "./interfaces";
+import { HttpResponse } from "../interfaces";
 export declare class Files extends Base {
-    getFiles(): Promise<GetFilesResponse>;
-    selectFileAndPrint(file: string): Promise<boolean>;
-    uploadFileToLocal(gcode: string): Promise<UploadFileToLocalResponse>;
-    uploadFileToSDCard(gcode: string): Promise<UploadFileToSDCardResponse>;
+    files(): Promise<HttpResponse<GetFilesResponse>>;
+    selectFileAndPrint(file: string): Promise<HttpResponse<unknown>>;
+    uploadFileToLocal(filename: string, gcode: string): Promise<HttpResponse<UploadFileToLocalResponse>>;
+    uploadFileToSDCard(filename: string, gcode: string): Promise<HttpResponse<UploadFileToSDCardResponse>>;
 }

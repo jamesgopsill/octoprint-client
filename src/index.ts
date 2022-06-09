@@ -17,9 +17,7 @@ applyMixins(OctoPrintClient, [General, Files, Job, Printer])
 export { OctoPrintClient as OctoPrintClient }
 
 // Interfaces
-
-export { ResponseError } from "./base"
-
+export * from "./interfaces"
 export * from "./general/interfaces"
 export * from "./files/interfaces"
 export * from "./job/enums"

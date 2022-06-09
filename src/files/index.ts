@@ -1,43 +1,28 @@
-import { Base, ResponseError } from "../base"
+import { Base } from "../base"
 import type {
 	GetFilesResponse,
 	UploadFileToLocalResponse,
 	UploadFileToSDCardResponse,
 } from "./interfaces"
 import { fetch } from "cross-fetch"
+import { HttpResponse } from "../interfaces"
 
 export class Files extends Base {
-	public getFiles(): Promise<GetFilesResponse> {
+	public files() {
 		const url = `${this.baseURL}/api/files`
-		return this.get(url)
+		return this.get<GetFilesResponse>(url)
 	}
 
 	public async selectFileAndPrint(file: string) {
 		const url = `${this.baseURL}/api/files/local/${file}`
-		const config: RequestInit = {
-			method: "POST",
-			mode: "cors",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				"X-Api-Key": this.apiKey,
-			},
-			body: JSON.stringify({
-				command: "select",
-				print: true,
-			}),
+		const args = {
+			command: "select",
+			print: true,
 		}
-		return fetch(url, config).then((r) => {
-			if (r.ok) {
-				return true
-			}
-			throw new ResponseError(r)
-		})
+		return this.post(url, args)
 	}
 
-	public async uploadFileToLocal(
-		gcode: string
-	): Promise<UploadFileToLocalResponse> {
+	public async uploadFileToLocal(filename: string, gcode: string) {
 		const url = `${this.baseURL}/api/files/local`
 
 		// Create the file upload from the string
@@ -46,12 +31,12 @@ export class Files extends Base {
 			// Node.js
 			const FormData = require("form-data")
 			formData = new FormData()
-			formData.append("file", gcode, "octoprint-client.gcode")
+			formData.append("file", gcode, filename)
 		} else {
 			// Browser
 			const blob = new Blob([gcode], { type: "text/plain" })
 			formData = new FormData()
-			formData.append("file", blob, "octoprint-client.gcode")
+			formData.append("file", blob, filename)
 		}
 
 		const config: RequestInit = {
@@ -64,17 +49,15 @@ export class Files extends Base {
 			body: formData,
 		}
 
-		return fetch(url, config).then((r) => {
-			if (r.ok) {
-				return r.json()
+		return fetch(url, config).then(
+			async (r: HttpResponse<UploadFileToLocalResponse>) => {
+				if (r.ok) r.data = await r.json()
+				return r
 			}
-			throw new ResponseError(r)
-		})
+		)
 	}
 
-	public async uploadFileToSDCard(
-		gcode: string
-	): Promise<UploadFileToSDCardResponse> {
+	public async uploadFileToSDCard(filename: string, gcode: string) {
 		const url = `${this.baseURL}/api/files/sdcard`
 
 		// Create the file upload from the string
@@ -83,12 +66,12 @@ export class Files extends Base {
 			// Node.js
 			const FormData = require("form-data")
 			formData = new FormData()
-			formData.append("file", gcode, "octoprint-client.gcode")
+			formData.append("file", gcode, filename)
 		} else {
 			// Browser
 			const blob = new Blob([gcode], { type: "text/plain" })
 			formData = new FormData()
-			formData.append("file", blob, "octoprint-client.gcode")
+			formData.append("file", blob, filename)
 		}
 
 		const config: RequestInit = {
@@ -101,11 +84,11 @@ export class Files extends Base {
 			body: formData,
 		}
 
-		return fetch(url, config).then((r) => {
-			if (r.ok) {
-				return r.json()
+		return fetch(url, config).then(
+			async (r: HttpResponse<UploadFileToSDCardResponse>) => {
+				if (r.ok) r.data = await r.json()
+				return r
 			}
-			throw new ResponseError(r)
-		})
+		)
 	}
 }
