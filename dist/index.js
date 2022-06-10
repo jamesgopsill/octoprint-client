@@ -34,4 +34,6 @@ exports.OctoPrintClient = OctoPrintClient;
 __exportStar(require("./interfaces"), exports);
 __exportStar(require("./general/interfaces"), exports);
 __exportStar(require("./files/interfaces"), exports);
+__exportStar(require("./printer/interfaces"), exports);
+__exportStar(require("./job/interfaces"), exports);
 __exportStar(require("./job/enums"), exports);

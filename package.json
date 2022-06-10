@@ -1,6 +1,6 @@
 {
   "name": "@jamesgopsill/octoprint-client",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Client for interacting with the OctoPrint API",
   "keywords": [
     "octoprint",
@@ -27,9 +27,9 @@
     "test:general": "jest --runInBand tests/general.test.ts",
     "test": "jest --runInBand",
     "build": "node utils/clean-dist.mjs && tsc",
-    "docs": "typedoc",
+    "create-docs": "typedoc",
     "format": "prettier --write src/**/* && prettier --write tests/**/*",
-    "pre-add": "pnpm format && pnpm docs && node utils/clean-dist.mjs && pnpm tsc && node utils/clean-crlf.mjs"
+    "pre-add": "pnpm format && pnpm create-docs && node utils/clean-dist.mjs && pnpm tsc && node utils/clean-crlf.mjs"
   },
   "dependencies": {
     "cross-fetch": "^3.1.4",

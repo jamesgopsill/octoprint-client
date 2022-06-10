@@ -7,7 +7,7 @@ The client has been developed as part of a research programme investigating agen
 To install the package, use the following code. I am aiming to put it onto npm soon.
 
 ```
-yarn add https://github.com/JamesGopsill/octoprint-client
+pnpm install https://github.com/JamesGopsill/octoprint-client
 ```
 
 You can then use in your code via by importing
@@ -18,14 +18,11 @@ import { OctoPrintClient } from "octoprint-client"
 // Create a new client.
 const client = new OctoPrintClient("OCTOPRINT_URL", "API_KEY")
 
-// Retrieve the name of your printer.
-try {
-	const versionInfo = await client.getVersionInformation()
-	console.log(versionInfo)
-} catch (res) { 
-	// Promise reject will most likely return the response that resulted in the error.
-	console.log(res)
+const version = await client.version()
+if (version.ok) {
+	console.log(version.data)
 }
+
 ```
 
 ## Testing

@@ -22,7 +22,7 @@ export abstract class Base {
 			bodyArgs = {}
 		}
 
-		return fetch(url, {
+		const config: RequestInit = {
 			method: "GET",
 			mode: "cors",
 			headers: {
@@ -31,7 +31,10 @@ export abstract class Base {
 				"X-Api-Key": this.apiKey
 			},
 			body: JSON.stringify(bodyArgs),
-		}).then(async (r: HttpResponse<T>) => {
+		}
+
+		return fetch(url, config)
+		.then(async (r: HttpResponse<T>) => {
 			if (r.ok) {
 				r.data = await r.json()
 			}
@@ -44,7 +47,7 @@ export abstract class Base {
 			bodyArgs = {}
 		}
 
-		return fetch(url, {
+		const config: RequestInit = {
 			method: "POST",
 			mode: "cors",
 			headers: {
@@ -53,7 +56,35 @@ export abstract class Base {
 				"X-Api-Key": this.apiKey
 			},
 			body: JSON.stringify(bodyArgs),
-		}).then(async (r: HttpResponse<T>) => {
+		}
+
+		return fetch(url, config)
+		.then(async (r: HttpResponse<T>) => {
+			if (r.ok && r.status != 204) {
+				r.data = await r.json()
+			}
+			return r
+		})
+	}
+
+	protected async delete<T>(url: string, bodyArgs?: {}) {
+		if (typeof bodyArgs != "undefined") {
+			bodyArgs = {}
+		}
+
+		const config: RequestInit = {
+			method: "DELETE",
+			mode: "cors",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+				"X-Api-Key": this.apiKey
+			},
+			body: JSON.stringify(bodyArgs),
+		}
+
+		return fetch(url, config)
+		.then(async (r: HttpResponse<T>) => {
 			if (r.ok && r.status != 204) {
 				r.data = await r.json()
 			}

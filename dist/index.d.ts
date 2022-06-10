@@ -16,4 +16,6 @@ export { OctoPrintClient as OctoPrintClient };
 export * from "./interfaces";
 export * from "./general/interfaces";
 export * from "./files/interfaces";
+export * from "./printer/interfaces";
+export * from "./job/interfaces";
 export * from "./job/enums";

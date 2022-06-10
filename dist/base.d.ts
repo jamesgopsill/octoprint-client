@@ -12,4 +12,5 @@ export declare abstract class Base {
      */
     protected get<T>(url: string, bodyArgs?: {}): Promise<HttpResponse<T>>;
     protected post<T>(url: string, bodyArgs?: {}): Promise<HttpResponse<T>>;
+    protected delete<T>(url: string, bodyArgs?: {}): Promise<HttpResponse<T>>;
 }
