@@ -1,5 +1,6 @@
 import { Base } from "../base"
 import { JobCommands } from "./enums"
+import { JobInformation } from "./interfaces"
 
 export class Job extends Base {
 	public async jobCommand(cmd: JobCommands) {
@@ -12,6 +13,6 @@ export class Job extends Base {
 
 	public async jobInformation() {
 		const url = `${this.baseURL}/api/job`
-		return this.get(url)
+		return this.get<JobInformation>(url)
 	}
 }
