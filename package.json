@@ -1,14 +1,21 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@jamesgopsill/octoprint-client",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Client for interacting with the OctoPrint API",
   "keywords": [
     "octoprint",
     "3d printing",
     "additive manufacturing"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "author": "James Gopsill",
   "license": "MIT",
   "private": false,
@@ -24,28 +31,23 @@
     "dist/**/*"
   ],
   "scripts": {
-    "test:general": "jest --runInBand tests/general.test.ts",
-    "test": "jest --runInBand",
-    "build": "node utils/clean-dist.mjs && tsc",
-    "create-docs": "typedoc",
-    "format": "prettier --write src/**/* && prettier --write tests/**/*",
-    "pre-add": "pnpm format && pnpm create-docs && node utils/clean-dist.mjs && pnpm tsc && node utils/clean-crlf.mjs"
-  },
-  "dependencies": {
-    "cross-fetch": "^3.1.4",
-    "form-data": "^4.0.0"
+    "test": "jest",
+    "build:dist": "rm -rf dist && tsc --project tsconfig.json && tsc --project tsconfig.cjs.json && node utils/create-dist-package-jsons.mjs",
+    "build:docs": "typedoc",
+    "format": "prettier --write src/**/* && prettier --write __tests__/**/*",
+    "pre-add": "pnpm format && pnpm build:docs"
   },
   "devDependencies": {
-    "@tsconfig/node16": "^1.0.2",
-    "@types/jest": "^27.0.2",
-    "@types/node": "^17.0.32",
-    "glob": "^8.0.1",
-    "jest": "^27.3.1",
-    "prettier": "^2.4.1",
-    "prettier-plugin-organize-imports": "^2.3.4",
-    "ts-jest": "^27.0.7",
-    "ts-node": "^10.4.0",
-    "typedoc": "^0.22.9",
-    "typescript": "^4.4.4"
+    "@tsconfig/node18-strictest": "^1.0.0",
+    "@tsconfig/node18-strictest-esm": "^1.0.1",
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.11.18",
+    "jest": "^29.4.1",
+    "prettier": "^2.8.3",
+    "prettier-plugin-organize-imports": "^3.2.2",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "typedoc": "^0.23.24",
+    "typescript": "^4.9.4"
   }
 }
