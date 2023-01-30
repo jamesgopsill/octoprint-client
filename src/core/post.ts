@@ -21,11 +21,10 @@ export async function post<T>(
 		body: JSON.stringify(bodyArgs),
 	}
 
-	const r = (await fetch(url, config)) as HttpResponse<T>
-	if (r.ok && r.status != 204) {
-		r.data = await r.json()
-	} else {
-		r.data = null
-	}
+	const request = new Request(url, config)
+
+	const r = (await fetch(request)) as HttpResponse<T>
+	r.data = null
+	if (r.ok && r.status != 204) r.data = await r.json()
 	return r
 }

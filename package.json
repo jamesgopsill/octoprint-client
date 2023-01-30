@@ -8,6 +8,10 @@
     "3d printing",
     "additive manufacturing"
   ],
+  "engines": {
+    "node": ">=19.0.0"
+  },
+  "engineStrict": true,
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "exports": {
@@ -34,8 +38,7 @@
     "test": "jest",
     "build:dist": "rm -rf dist && tsc --project tsconfig.json && tsc --project tsconfig.cjs.json && node utils/create-dist-package-jsons.mjs",
     "build:docs": "typedoc",
-    "format": "prettier --write src/**/* && prettier --write __tests__/**/*",
-    "pre-add": "pnpm format && pnpm build:docs"
+    "format": "prettier --write src/**/* && prettier --write __tests__/**/*"
   },
   "devDependencies": {
     "@tsconfig/node18-strictest": "^1.0.0",
