@@ -169,3 +169,47 @@ export interface UploadFileToSDCardResponse {
 	}
 	done: boolean
 }
+
+
+export interface SliceRequest {
+	slicer: string
+	gcode: string
+	printerProfile: string
+	profile: string
+	"profile.infill": number
+	"profile.fill_density": number
+	position: {
+		x: number
+		y: number
+	}
+	print: boolean
+}
+
+export interface CopyFileResponse {
+	origin: string
+	name: string
+	path: string
+	refs: {
+		download: string
+		resource: string
+	}
+}
+
+export interface SliceFileResponse {
+	origin: string
+	name: string
+	path: string
+	refs: {
+		download: string
+		resource: string
+	}
+}
+
+export interface MoveFileResponse {
+	origin: string
+	name: string
+	path: string
+	refs: {
+		resource: string
+	}
+}

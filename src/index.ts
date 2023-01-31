@@ -44,7 +44,9 @@ export class OctoPrintClient {
 	// Files
 	public files = Files.files
 	public print = Files.print
-	public uploadFileToLocal = Files.uploadFileToLocal
-	public uploadFileToSDCard = Files.uploadFileToSDCard
-	public deleteLocalFile = Files.deleteLocalFile
+	public uploadGcode = Files.uploadGcode
+	public deleteFile = Files.deleteFile
+	public sliceFile = Files.sliceFile
+	public moveFile = Files.moveFile
+	public copyFile = Files.copyFile
 }
