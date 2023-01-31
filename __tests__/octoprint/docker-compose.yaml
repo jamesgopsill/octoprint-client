@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  octoprint:
+    image: octoprint/base
+    build:
+      context: .
+      dockerfile: base.Dockerfile
+    volumes:
+      - ./config.yaml:/octoprint/octoprint/config.yaml
+    ports:
+      - 3000:80

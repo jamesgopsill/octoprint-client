@@ -1,0 +1,34 @@
+api:
+  allowCrossOrigin: true
+  enabled: true
+  key: test
+plugins:
+  announcements:
+    _config_version: 1
+  discovery:
+    upnpUuid: fe903817-ccfa-4a6d-bdf4-ebf43346e024
+  errortracking:
+    unique_id: f27d6d14-b190-44b7-b15c-886408e54b32
+  gcodeviewer:
+    _config_version: 1
+  softwareupdate:
+    _config_version: 9
+  tracking:
+    unique_id: 057810ca-3de8-4fa9-a3f4-6c4903a0e8e5
+  virtual_printer:
+    _config_version: 1
+printerProfiles:
+  default: _default
+server:
+  commands:
+    serverRestartCommand: s6-svc -r /var/run/s6/services/octoprint
+  firstRun: false
+  onlineCheck:
+    enabled: false
+  pluginBlacklist:
+    enable: false
+  secretKey: Li13B4qGqVxmDYvcLRFIu5Qlxtenhp78
+  seenWizards:
+    backup: null
+    corewizard: 4
+    tracking: null

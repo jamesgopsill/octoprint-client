@@ -1,25 +1,52 @@
-import { Base } from "./base"
-import { applyMixins } from "./apply-mixins"
-import { General } from "./general"
-import { Files } from "./files"
-import { Job } from "./job"
-import { Printer } from "./printer"
+import { del } from "./core/delete.js"
+import { get } from "./core/get.js"
+import { post } from "./core/post.js"
+import * as Printer from "./endpoints/printer.js"
+import * as General from "./endpoints/general.js"
+import * as Job from "./endpoints/job.js"
+import * as Files from "./endpoints/files.js"
 
-/**
- * Inherits from all the other classes featuring the API calls to OctoPrint.
- *
- *
- */
-class OctoPrintClient extends Base {}
-interface OctoPrintClient extends General, Files, Job, Printer {}
-applyMixins(OctoPrintClient, [General, Files, Job, Printer])
+export * from "./definitions.js"
+export * from "./enums.js"
 
-export { OctoPrintClient as OctoPrintClient }
+export class OctoPrintClient {
+	public baseUrl: string = ""
+	public apiKey: string = ""
 
-// Interfaces
-export * from "./interfaces"
-export * from "./general/interfaces"
-export * from "./files/interfaces"
-export * from "./printer/interfaces"
-export * from "./job/interfaces"
-export * from "./job/enums"
+	constructor(url: string, apiKey: string) {
+		this.baseUrl = url
+		this.apiKey = apiKey
+	}
+
+	public ping = () => "pong"
+	
+	// Core
+	protected get = get
+	protected post = post
+	protected delete = del
+
+	// Printer
+	public status = Printer.status
+	public homeAllAxes = Printer.homeAllAxes
+	public jog = Printer.jog
+
+	// General
+	public version = General.version
+	public server = General.server
+	public connection = General.connection
+	public connectPrinter = General.connectPrinter
+	public disconnectPrinter = General.disconnectPrinter
+
+	// Job
+	public jobCommand = Job.jobCommand
+	public jobInformation = Job.jobInformation
+
+	// Files
+	public files = Files.files
+	public print = Files.print
+	public uploadGcode = Files.uploadGcode
+	public deleteFile = Files.deleteFile
+	public sliceFile = Files.sliceFile
+	public moveFile = Files.moveFile
+	public copyFile = Files.copyFile
+}
