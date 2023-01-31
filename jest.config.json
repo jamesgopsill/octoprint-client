@@ -1,6 +1,7 @@
 {
 	"preset": "ts-jest",
 	"rootDir": "__tests__",
+	"testRegex": "(.*?).test.ts",
 	"testEnvironment": "node",
 	"extensionsToTreatAsEsm": [".ts"],
 	"maxWorkers": 1,

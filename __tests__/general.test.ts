@@ -1,9 +1,10 @@
 import { OctoPrintClient } from "../src/index.js"
+import { url, apiKey } from "./test.config.js"
 
 let client: OctoPrintClient
 
 beforeAll(() => {
-	client = new OctoPrintClient("http://localhost:3000", "test")
+	client = new OctoPrintClient(url, apiKey)
 })
 
 test(`GET version`, async () => {
@@ -18,7 +19,7 @@ test(`GET server`, async () => {
 	if (r.ok) console.log(r.data)
 })
 
-test(`GET connection`,async () => {
+test(`GET connection`, async () => {
 	const r = await client.connection()
 	expect(r.ok).toBe(true)
 	if (r.ok) console.log(r.data)

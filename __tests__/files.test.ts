@@ -1,11 +1,12 @@
 import { OctoPrintClient } from "../src/index.js"
 import { readFileSync } from "fs"
+import { url, apiKey } from "./test.config.js"
 
 let client: OctoPrintClient
 const gcodeFilename = "test.gcode"
 
 beforeAll(() => {
-	client = new OctoPrintClient("http://localhost:3000", "test")
+	client = new OctoPrintClient(url, apiKey)
 })
 
 test("POST gcode file", async () => {
@@ -26,8 +27,7 @@ test("GET files", async () => {
 	if (r.ok) console.log(r.data)
 })
 
-
-test("POST copy file",async () => {
+test("POST copy file", async () => {
 	const src = `${gcodeFilename}`
 	const dest = `abc.gcode`
 	const r = await client.copyFile("local", src, dest)
@@ -40,10 +40,9 @@ test("GET files", async () => {
 	if (r.ok) console.log(r.data)
 })
 
-
-test("DELETE file",async () => {
+test("DELETE file", async () => {
 	let r = await client.deleteFile("local", gcodeFilename)
 	expect(r.ok).toBe(true)
-	r = await client.deleteFile("local" ,"/abc.gcode")
+	r = await client.deleteFile("local", "/abc.gcode")
 	expect(r.ok).toBe(true)
 })
