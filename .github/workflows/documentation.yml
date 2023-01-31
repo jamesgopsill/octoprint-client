@@ -21,7 +21,7 @@ jobs:
       - name: Build Docs
         run: pnpm build:docs
       # Upload docs artifact for github-pages
-      - uses: actions/upload-pages-artifact
+      - uses: actions/upload-pages-artifact@v1
         with:
           path: docs/
 
