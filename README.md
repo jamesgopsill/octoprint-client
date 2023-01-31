@@ -1,13 +1,13 @@
 # OctoPrint Client
 
-The client has been developed as part of a research programme investigating agent-based manufacturing systems. It is isomorphic and able to both server (Node.js) and client-side (Browser).
+The client has been developed as part of a research programme investigating agent-based manufacturing systems. It is isomorphic capable of running on server (Node.js) and client-side (Browser) applications.
 
 ## Using octoprint-client
 
 To install the package, use the following code. I am aiming to put it onto npm soon.
 
 ```
-pnpm install https://github.com/JamesGopsill/octoprint-client
+pnpm install @jamesgopsill/octoprint-client
 ```
 
 You can then use in your code via by importing
@@ -18,27 +18,22 @@ import { OctoPrintClient } from "octoprint-client"
 // Create a new client.
 const client = new OctoPrintClient("OCTOPRINT_URL", "API_KEY")
 
-const version = await client.version()
-if (version.ok) {
-	console.log(version.data)
+const response = await client.version()
+if (response.ok) {
+	console.log(response.data)
 }
 
 ```
 
 ## Testing
 
-To test the client, we use the OctoPrint docker image and spin up a local instance that the client can interface with. To spin up an instance, you will need docker installed. Then simply go `cd` into the tests directory and run:
+To test the client, we use the OctoPrint docker image and spin up a local instance that the client can interface with. To spin up an instance, you will need docker installed. Then simply `cd` into the `__tests__/octoprint` directory and run:
 
 ```
 docker-compose up
 ```
 
-To create the Octoprint instance that can be accessed via `http://localhost`. You will need configure octoprint the first time you run the container. Once configured, you can access the api key from the settings menu in OctoPrint. You will then need to create a `test.config.ts` file in the tests folder (ignored by .gitignore) to add the parameters in to create the client during the tests. The file should contain the following:
-
-```typescript
-export const url = "ADD URL"
-export const apiKey = "ADD API KEY"
-```
+To create the Octoprint instance that can be accessed at `http://localhost`.
 
 ## Client Docs
 

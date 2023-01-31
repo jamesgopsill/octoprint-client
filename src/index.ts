@@ -5,6 +5,7 @@ import * as Printer from "./endpoints/printer.js"
 import * as General from "./endpoints/general.js"
 import * as Job from "./endpoints/job.js"
 import * as Files from "./endpoints/files.js"
+import * as Languages from "./endpoints/languages.js"
 
 export * from "./definitions.js"
 export * from "./enums.js"
@@ -27,8 +28,9 @@ export class OctoPrintClient {
 
 	// Printer
 	public status = Printer.status
-	public homeAllAxes = Printer.homeAllAxes
+	public home = Printer.home
 	public jog = Printer.jog
+	public feedrate = Printer.feedrate
 
 	// General
 	public version = General.version
@@ -49,4 +51,7 @@ export class OctoPrintClient {
 	public sliceFile = Files.sliceFile
 	public moveFile = Files.moveFile
 	public copyFile = Files.copyFile
+
+	// Languages
+	public languages = Languages.languages
 }

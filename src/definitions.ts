@@ -213,3 +213,30 @@ export interface MoveFileResponse {
 		resource: string
 	}
 }
+
+export interface LanguagesResponse {
+	"language_packs": {
+		"_core": {
+			identifier: string
+			name: string
+			languages: Language[]
+		}
+	}
+}
+
+export interface Language {
+	locale: string
+	"locale_display": string
+	"locale_english": string
+	"last_update": number
+	"author": string
+}
+
+export type HOME = 
+	["x", "y", "z"] |
+	["x"] |
+	["y"] |
+	["z"] |
+	["x", "y"] |
+	["x", "z"] |
+	["y", "z"] 
