@@ -10,10 +10,12 @@ To install the package, use the following code. I am aiming to put it onto npm s
 pnpm install @jamesgopsill/octoprint-client
 ```
 
-You can then use in your code via by importing
+You can then use in your code:
+
+**Typescript / Javascript (ESM)**
 
 ```typescript
-import { OctoPrintClient } from "octoprint-client"
+import { OctoPrintClient } from "@jamesgopsill/octoprint-client"
 
 // Create a new client.
 const client = new OctoPrintClient("OCTOPRINT_URL", "API_KEY")
@@ -22,7 +24,21 @@ const response = await client.version()
 if (response.ok) {
 	console.log(response.data)
 }
+```
 
+
+**Javascript (CJS)**
+
+```javascript
+const octo = require("@jamesgopsill/octoprint-client")
+
+// Create a new client.
+const client = new octo.OctoPrintClient("OCTOPRINT_URL", "API_KEY")
+
+const response = await client.version()
+if (response.ok) {
+	console.log(response.data)
+}
 ```
 
 ## Testing
