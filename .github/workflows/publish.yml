@@ -18,13 +18,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install PNPM
         run: npm install -g pnpm
-      - name: Download Packages
+      - name: Download Dependencies
         run: pnpm install
       - name: Build Package
         run: pnpm build:dist
-      - name: Set publishing config
-        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+      - name: Publish Package
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - name: Publishing Package
-        run: pnpm publish --no-git-checks --access public
