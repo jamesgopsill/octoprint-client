@@ -25,10 +25,10 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/JamesGopsill/octoprint-client"
+    "url": "https://github.com/jamesgopsill/octoprint-client"
   },
   "bugs": {
-    "url": "https://github.com/JamesGopsill/octoprint-client/issues"
+    "url": "https://github.com/jamesgopsill/octoprint-client/issues"
   },
   "homepage": "https://jamesgopsill.github.io/octoprint-client/",
   "files": [
