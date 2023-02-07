@@ -1,2 +1,3 @@
 *.gcode
 *.Dockerfile
+pnpm-lock.yaml
