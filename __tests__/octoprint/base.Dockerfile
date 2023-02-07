@@ -1,3 +1,3 @@
-FROM octoprint/octoprint
+FROM octoprint/octoprint:1.8.6
 
-RUN --mount=type=secret,id=password octoprint --basedir /octoprint/octoprint user add --admin --password print octo
+RUN octoprint --basedir /octoprint/octoprint user add --admin --password print octo
